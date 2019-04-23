@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+// components
+
+import Home from './views/Home';
+
+// actions
 // example
 import { standardAction } from './action-creators/standard';
 
+// styles
 import './App.css';
 
 const Nav = () => <h1> <Link to="/"> Home </Link> </h1>;
-const Home = () => <h1> HOME </h1>;
+
 
 class App extends Component {
   render() {
