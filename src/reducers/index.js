@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import standardReducer from './standard';
-import fetchReducer from './fetch';
+import skaterReducer from './skater';
 
 export default combineReducers({
   standardReducer,
-  fetchReducer
+  skaterReducer
 });

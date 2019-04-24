@@ -7,7 +7,7 @@ const columns = [
   {
     Header: 'NAME',
     accessor: 'Name',
-    width: 400
+    width: 700
   }, {
     Header: 'POS',
     accessor: 'Pos',
@@ -38,21 +38,6 @@ const columns = [
   }, {
     Header: 'OPP',
     accessor: 'OppTeam'
-  }, {
-    Header: 'PROJTOIEV',
-    accessor: 'ProjTOIEV',
-    sortMethod: sortFloatColumn,
-    width: 125
-  }, {
-    Header: 'PROJTOIPP',
-    accessor: 'ProjTOIPP',
-    sortMethod: sortFloatColumn,
-    width: 125
-  }, {
-    Header: 'PROJTOISH',
-    accessor: 'ProjTOISH',
-    sortMethod: sortFloatColumn,
-    width: 125
   }
 ];
 

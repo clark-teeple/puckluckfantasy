@@ -1,0 +1,44 @@
+.App-body {
+  margin: 0px !important;
+  font-family: 'Lato', serif;
+  background-image: url(http://res.cloudinary.com/dpe1j785q/image/upload/v1526327500/hockey-ice_crmoxg.jpg);
+  background-size: contain;
+  padding: 10px;
+  padding-top: 30px;
+}
+
+body {
+  line-height: 30px;
+}
+
+.navbar {
+}
+
+.navimg {
+  height: 250px;
+  top: -85px;
+  position: absolute;
+}
+
+.navbar-upper {
+  height: 75px;
+  box-shadow: 20px 2px grey;
+}
+
+.navbar-lower {
+  height: 50px;
+  background-color: rgba(0, 94, 184, 0.8);
+  box-shadow: 2px 1px 1px grey;
+}
+
+.twitter {
+  line-height: 75px;
+  height: 75px;
+  vertical-align: middle;
+}
+
+ul {
+  list-style-type: none;
+  margin-left: 0rem;
+}
+
