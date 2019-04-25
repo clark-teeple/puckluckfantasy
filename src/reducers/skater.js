@@ -1,3 +1,7 @@
+const genID = () => {
+  return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
+}
+
 const processSkaterData = (data) => {
   const objectProperties = ['Name', 'Pos', 'FPts', 'FPtsSD', 'Salary', 'SalarySD', 'Value', 'ValueSD', 'Rank', 'RankSD', 'Team', 'OppTeam', 'ProjTOIEV', 'ProjTOIPP', 'ProjTOISH'];
   const arrayData = data.replace(/(\r\n|\r|\n)/g, ',').split(',');
@@ -15,6 +19,7 @@ const processSkaterData = (data) => {
     const playerObject = {};
     const playerRow = arrayData.slice(i, i + objectProperties.length);
     objectProperties.forEach((property, index) => {
+      playerObject.id = genID();
       playerObject[property] = playerRow[index];
     });
     processedData[playerObject['Pos']].push(playerObject);
@@ -56,7 +61,7 @@ export default (state = {}, action) => {
         loadedSkaterData: true,
         data,
         individualData: [...data['C'], ...data['D'], ...data['W']],
-        pairData: [...data['DC'], ...data['DW'], ...data['CW'], ...['WW']],
+        pairData: [...data['DC'], ...data['DW'], ...data['CW'], ...data['WW']],
         stackData: data['F3'],
         todayTeams,
         selectedTeams: todayTeams,
@@ -82,7 +87,7 @@ export default (state = {}, action) => {
           selectedIndividualPositions: state.selectedIndividualPositions.filter(x => x !== action.payload)
         }
       } else {
-        return {
+          return {
           ...state,
           selectedIndividualPositions: state.selectedIndividualPositions.concat(action.payload)
         }

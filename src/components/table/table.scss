@@ -2,10 +2,6 @@
   border: none;
 }
 
-.rt-tr {
-  padding: 10px;
-}
-
 .-header {
   border: black solid 1px;
 }
@@ -14,6 +10,25 @@
   padding: 10px !important;
   border-left: solid 1px rgba(230, 230, 230, 0.5) !important;
   text-align: left;
+}
+
+.dragrow {
+  width: 100%;
+  height: 60px;
+  position: absolute;
+  /* pointer-events: none; */
+}
+
+.rt-tr {
+  padding: 10px;
+}
+
+.rt-tr.-even:active  + .dragrow {
+  pointer-events: auto;
+}
+
+.rt-tr.-odd:active + .dragrow {
+  pointer-events: auto;
 }
 
 .rt-tr.-odd:hover {
@@ -38,6 +53,9 @@
   border: none;
 }
 
+.rt-expander.-open {
+  display: none;
+}
 
 .tableSection {
   background-color: white;

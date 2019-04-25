@@ -1,7 +1,6 @@
 import React from 'react';
-
-import Table from '../../components/table';
-import { sortIntegerColumn, sortFloatColumn } from '../../components/table/tableUtils';
+import Table from '../../../components/table';
+import { sortIntegerColumn, sortFloatColumn } from '../../../components/table/tableUtils';
 
 const columns = [
   {
