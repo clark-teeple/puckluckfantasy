@@ -5,45 +5,92 @@ import SkaterDrop from './OptimizerDropTarget';
 import './optimizer.scss';
 
 class Optimizer extends Component {
-  genOptimizerRows = () => {
-    return this.props.optimizerReducer.optimizerData.map((row) => {
-      return (
-        <div
-          className="optimizer-row"
-          key={ row.Name }
-        >
-          { row.Name }
-        </div>
-      );
-    });
-  }
-
   render() {
-    let rows;
+    const {
+      optimizerSalary,
+      optimizerData,
+      optimizerPlayers,
+      optimizerIsValid,
+      optimizerMessage
+    } = this.props.optimizerReducer;
 
-    if (this.props.optimizerReducer.optimizerData) {
-      rows = this.genOptimizerRows();
-    }
-
-    const remainingSalaryPerPlayer = this.props.optimizerReducer.optimizerPlayers> 0 ? Math.floor(this.props.optimizerReducer.optimizerSalary / this.props.optimizerReducer.optimizerPlayers) : 0;
-
+    const remainingSalaryPerPlayer = optimizerPlayers > 0 ? Math.floor(optimizerSalary / optimizerPlayers) : 0;
+    const instructionsClassName = optimizerIsValid ? 'instructions cell large-2' : 'instructions-invalid cell large-2';
     return (
-      <div className="optimizer-floater">
-        <div className="instructions">
-          <span> REMAINING SALARY: { this.props.optimizerReducer.optimizerSalary } </span>
-          <span> REMAINING SALARY/PLAYER { remainingSalaryPerPlayer } </span>
-        </div>
-        <div className="tool">
-          <SkaterDrop
-            position='D'
-            remainingPlayers={ this.props.optimizerReducer.optimizerPlayers }
-            remainingSalary={ this.props.optimizerReducer.optimizerSalary }
-          >
-            {rows}
-          </SkaterDrop>
-        </div>
-        <div className="output"> asdfasd </div>
-        <div>
+      <div className="optimizer-floater grid-container">
+        <div
+          className="grid-y"
+          style={ { height: '90vh' } }
+        >
+          <div className={ instructionsClassName }>
+            <span> REMAINING SALARY: { optimizerSalary } </span>
+            <span> REMAINING SALARY/PLAYER { remainingSalaryPerPlayer } </span>
+            <span> { optimizerMessage } </span>
+          </div>
+          <div className="cell large-10">
+            <div className="grid-container">
+              <div
+                className="tool grid-y"
+                style={ { height: '40vh' } }
+              >
+                <SkaterDrop
+                  player={ optimizerData['centerOne'] }
+                  position='centerOne'
+                  accepts={ ['C'] }
+                  className="cell large-10"
+                  placeholder="Center"
+                />
+                <SkaterDrop
+                  player={ optimizerData['centerTwo'] }
+                  position='centerTwo'
+                  accepts={ ['C'] }
+                  placeholder="Center"
+                />
+                <SkaterDrop
+                  player={ optimizerData['wingerOne'] }
+                  position='wingerOne'
+                  accepts={ ['w'] }
+                  placeholder="Winger"
+                />
+                <SkaterDrop
+                  player={ optimizerData['wingerTwo'] }
+                  position='wingerTwo'
+                  accepts={ ['w'] }
+                  placeholder="Winger"
+                />
+                <SkaterDrop
+                  player={ optimizerData['wingerThree'] }
+                  position='wingerThree'
+                  accepts={ ['w'] }
+                  placeholder="Winger"
+                />
+                <SkaterDrop
+                  player={ optimizerData['defenseOne'] }
+                  position='defenseOne'
+                  accepts={ ['D'] }
+                  placeholder="Defense"
+                />
+                <SkaterDrop
+                  player={ optimizerData['defenseTwo'] }
+                  position='defenseTwo'
+                  accepts={ ['D'] }
+                  placeholder="Defense"
+                />
+                <SkaterDrop
+                  player={ optimizerData['goalie'] }
+                  position="goalie"
+                  accepts={ ['G'] }
+                  placeholder="Goalie"
+                />
+                <SkaterDrop
+                  player={ optimizerData['util'] }
+                  position="util"
+                  accepts={ ['D', 'C', 'W'] }
+                  placeholder="Utility"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

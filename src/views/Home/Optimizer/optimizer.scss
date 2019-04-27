@@ -1,5 +1,29 @@
-.optimizer-row {
-  height: 40px;
-  width: 100%;
-  background-color: purple;
+.tool {
+  .optimizerrow {
+    width: 100%;
+    border-bottom: blue solid 2px;
+
+    &--highlighted {
+      background: purple;
+    }
+
+    &__skater-empty {}
+
+    &__skater-occupied {
+      background-color: white;
+      height: 100%;
+    }
+
+    .optimizerplaceholder {
+      text-align: center;
+    }
+  }
+}
+
+.instructions {
+  background: green;
+}
+
+.instructions-invalid {
+  background: red;
 }

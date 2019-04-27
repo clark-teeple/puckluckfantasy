@@ -53,6 +53,20 @@ class Home extends Component {
     const pairData = this.setPairTableData();
     const stackData = this.setStackTableData();
 
+    const {
+      todayTeams,
+      selectedTeams,
+      selectedIndividualPositions,
+      selectedPairPositions
+    } = this.props.skaterReducer;
+
+    const {
+      applyIndividualPositionFilter,
+      applyPairPositionFilter,
+      applyTeamFilter,
+      addSkaterToOptimizer
+    } = this.props;
+
     return (
       <div className="grid-container fluid">
         <div className="grid-x grid-padding-x">
@@ -60,9 +74,9 @@ class Home extends Component {
             <div className="grid-x grid-margin-x">
               <div className="cell">
                 <TeamFilter
-                  todayTeams={ this.props.skaterReducer.todayTeams }
-                  onCheck={ this.props.applyTeamFilter }
-                  selectedTeams={ this.props.skaterReducer.selectedTeams }
+                  todayTeams={ todayTeams }
+                  onCheck={ applyTeamFilter }
+                  selectedTeams={ selectedTeams }
                 />
               </div>
             </div>
@@ -80,13 +94,13 @@ class Home extends Component {
                     <div className="cell large-1">
                       <PositionFilter
                         positions={ ['C', 'W', 'D'] }
-                        selectedPositions={ this.props.skaterReducer.selectedIndividualPositions}
-                        onCheck={ this.props.applyIndividualPositionFilter }
+                        selectedPositions={ selectedIndividualPositions}
+                        onCheck={ applyIndividualPositionFilter }
                       />
                     </div>
                     <div className="cell auto">
                       <SkaterTable
-                        addSkaterToOptimizer={ this.props.addSkaterToOptimizer }
+                        addSkaterToOptimizer={ addSkaterToOptimizer }
                         data={ skaterData }
                       />
                     </div>
@@ -97,8 +111,8 @@ class Home extends Component {
                     <div className="cell large-1">
                       <PositionFilter
                         positions={ ['DC', 'DW', 'CW', 'WW'] }
-                        selectedPositions={ this.props.skaterReducer.selectedPairPositions}
-                        onCheck={ this.props.applyPairPositionFilter }
+                        selectedPositions={ selectedPairPositions}
+                        onCheck={ applyPairPositionFilter }
                       />
                     </div>
                     <div className="cell auto">
@@ -134,7 +148,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addSkaterToOptimizer: (skater) => dispatch(addSkaterToOptimizer(skater)),
+  addSkaterToOptimizer: (skater, sourceId) => dispatch(addSkaterToOptimizer(skater, sourceId)),
   applyTeamFilter: (team) => dispatch(applyTeamFilter(team)),
   applyIndividualPositionFilter: (position) => dispatch(applyIndividualPositionFilter(position)),
   applyPairPositionFilter: (position) => dispatch(applyPairPositionFilter(position))

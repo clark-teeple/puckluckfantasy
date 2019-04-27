@@ -7,10 +7,12 @@ import './table.scss';
 
 const cellSource = {
   beginDrag(props) {
-    return {}
+    return props;
   },
-  endDrag(props) {
-    props.addSkaterToOptimizer(props.value);
+  endDrag(props, monitor) {
+    if (monitor.getDropResult()) {
+      props.addSkaterToOptimizer(props.value, monitor.getDropResult().position);
+    }
   }
 };
 
