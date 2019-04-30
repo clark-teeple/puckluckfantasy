@@ -1,4 +1,4 @@
-Source for [puckluckfantasy](https://www.puckluckfantasy.com).
+Source for [puckluckfantasy](http://www.puckluckfantasy.com).
 
 Upcoming enhancements:
 
