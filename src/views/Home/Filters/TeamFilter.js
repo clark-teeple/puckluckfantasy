@@ -1,31 +1,28 @@
 import React from 'react';
 import { Button, ButtonGroup, Colors, Sizes } from 'react-foundation';
+/* import TeamColorBox from '../../../components/teamColorBox';*/
+import './filters.scss';
 
 const genTeamFilter = (todayTeams, onCheck, selectedTeams) => {
   return todayTeams.sort().map((team) => {
     return (
-      <Button
-        color={ selectedTeams.includes(team) ? Colors.PRIMARY : Colors.SECONDARY }
-        onClick={ () => onCheck(team) }
-        key={`${team}_filter`}
-      >
-        {team}
-      </Button>
+        <Button
+          color={ selectedTeams.includes(team) ? Colors.PRIMARY : Colors.SECONDARY }
+          onClick={ () => onCheck(team) }
+          key={`${team}_filter`}
+          className="team-filter-button"
+        >
+          {team}
+        </Button>
     );
   });
 }
 
 const TeamFilter = (props) => {
   return (
-    <div className="grid-container fluid">
-      <div className="grid-x grid-margin-x">
-        <ButtonGroup size={Sizes.LARGE}>
-          <div className="cell large-auto">
-            { genTeamFilter(props.todayTeams, props.onCheck, props.selectedTeams) }
-          </div>
-        </ButtonGroup>
-      </div>
-    </div>
+    <ButtonGroup size={Sizes.LARGE} style={ { display: 'inline' } }>
+      { genTeamFilter(props.todayTeams, props.onCheck, props.selectedTeams) }
+    </ButtonGroup>
   );
 }
 

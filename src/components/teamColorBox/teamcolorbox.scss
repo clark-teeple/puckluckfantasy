@@ -1,0 +1,41 @@
+.team-color-box {
+  position: relative;
+
+  .inner-triangle-right {
+    border-top: 40px solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    right: 0px;
+    z-index: 2;
+    bottom: 0;
+  }
+  .outer-triangle-right {
+    border-left: 50px solid transparent;
+    border-top: 50px solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    right: 0px;
+    z-index: 1;
+    bottom: 0;
+  }
+  .inner-triangle-left {
+    border-bottom: 40px solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+  }
+  .outer-triangle-left {
+    border-bottom: 50px solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+  }
+}

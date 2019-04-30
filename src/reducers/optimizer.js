@@ -1,23 +1,6 @@
 const initialSalary = 50000;
 const initialPlayers = 9;
-
-const getTotals = (state, action, optimizerCandidate) => {
-  let totalSalary = parseInt(0, 10);
-  let totalTeams = [];
-  let totalPlayers = 0;
-
-  Object.keys(optimizerCandidate).forEach((key) => {
-    if (optimizerCandidate[key] && optimizerCandidate[key].Name) {
-      totalPlayers++;
-      totalSalary = parseInt(totalSalary, 10) +  parseInt(optimizerCandidate[key].Salary, 10);
-      if (!totalTeams.includes(optimizerCandidate[key].Team)) {
-        totalTeams.concat(optimizerCandidate[key].Team);
-      }
-    }
-  });
-
-  return { totalSalary, totalTeams, totalPlayers };
-};
+const initialFPTS = 0
 
 const disallowDuplicates = (state, action) => {
   if (!Object.keys(state.optimizerData).filter((key) => {
@@ -27,40 +10,80 @@ const disallowDuplicates = (state, action) => {
   }
 };
 
-export default (state = { optimizerData: {}, optimizerSalary: initialSalary, optimizerPlayers: initialPlayers, optimizerIsValid: true }, action) => {
+const checkOptimizerValid = (candidate, current) => {
+  let valid = true;
+  let salaryRemaining = initialSalary;
+  let totalTeams = [];
+  let playersRemaining = initialPlayers;
+  let errorMessage = false;
+  let skatersRemaining = initialPlayers - 1;
+  let totalFPTS = initialFPTS;
+
+  Object.keys(candidate).forEach((key) => {
+    if (candidate.hasOwnProperty(key) && candidate[key].Name) {
+      totalFPTS += parseFloat(candidate[key].FPts);
+      playersRemaining--;
+      salaryRemaining = parseInt(salaryRemaining, 10) - parseInt(candidate[key].Salary, 10);
+      if (candidate[key].Pos !== 'G') {
+        skatersRemaining--;
+      }
+      if (!totalTeams.includes(candidate[key].Team)) {
+        totalTeams = totalTeams.concat(candidate[key].Team);
+      }
+    }
+  });
+
+  if (salaryRemaining < 0) {
+    valid = false;
+  }
+  if (playersRemaining < 0) {
+    valid = false;
+  }
+  if (skatersRemaining === 0 && totalTeams.length < 3) {
+    valid = false;
+    errorMessage = true;
+  }
+  // save a loop
+  return {valid, salaryRemaining, playersRemaining, errorMessage, totalFPTS};
+};
+
+export default (state = { optimizerData: {}, optimizerSalary: initialSalary, optimizerPlayers: initialPlayers, optimizerIsValid: true, optimizerFPTS: initialFPTS}, action) => {
   switch (action.type) {
     case 'ADD_SKATER_TO_OPTIMIZER':
 
-      let optimizerIsValid = state.optimizerIsValid;
-      let optimizerCandidate = Object.assign({}, state.optimizerData);
+      let addCandidate = Object.assign({}, state.optimizerData);
 
       // disallow duplicates
       if (disallowDuplicates(state, action)) {
-        optimizerCandidate[action.payload.position] = action.payload.skater;
+        addCandidate[action.payload.position] = action.payload.skater;
       }
 
-      const totals = getTotals(state, action, optimizerCandidate);
-
-      if (totals.totalSalary > initialSalary) {
-        optimizerIsValid = false;
-      }
-
-      let optimizerMessage;
-      if (totals.totalPlayers === 9 && totals.totalTeams.length < 3) {
-        optimizerIsValid = false;
-        optimizerMessage = 'Lineup requires skaters from 3 teams';
-      }
+      const addCandidateProperties = checkOptimizerValid(addCandidate, state.optimizerData);
 
       return {
         ...state,
-        optimizerData: optimizerCandidate,
-        optimizerSalary: initialSalary - totals.totalSalary,
-        optimizerIsValid,
-        optimizerPlayers: totals.totalPlayers,
-        optimizerMessage
+        optimizerData: addCandidate,
+        optimizerSalary: addCandidateProperties.salaryRemaining,
+        optimizerIsValid: addCandidateProperties.valid,
+        optimizerPlayers: addCandidateProperties.playersRemaining,
+        optimizerMessage: addCandidateProperties.errorMessage,
+        optimizerFPTS: addCandidateProperties.totalFPTS
       }
     case 'REMOVE_SKATER_FROM_OPTIMIZER':
-      return state
+      let removeCandidate = Object.assign({}, state.optimizerData);
+      delete removeCandidate[action.payload.position];
+
+      const removeCandidateProperties = checkOptimizerValid(removeCandidate, state.OpimizerData);
+
+      return {
+        ...state,
+        optimizerData: removeCandidate,
+        optimizerSalary: removeCandidateProperties.salaryRemaining,
+        optimizerPlayers: removeCandidateProperties.playersRemaining,
+        optimizerMessage: removeCandidateProperties.errorMessage,
+        optimizerIsValid: removeCandidateProperties.valid,
+        optimizerFPTS: removeCandidateProperties.totalFPTS
+      }
     default:
       return state
   }

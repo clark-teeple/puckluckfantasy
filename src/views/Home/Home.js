@@ -134,8 +134,23 @@ class Home extends Component {
               </Tabs>
             </div>
           </div>
-          <div className="cell large-4">
-            <Optimizer />
+          <div className="cell large-3">
+            <div className="optimizer-floater">
+              <Tabs>
+                <TabList>
+                  <ButtonGroup isExpanded size={ Sizes.LARGE }>
+                    <Tab className="button expanded large alert"> Lineup Builder </Tab>
+                    <Tab className="button expanded large alert"> GPP Optimizer </Tab>
+                  </ButtonGroup>
+                </TabList>
+                <TabPanel>
+                  <Optimizer />
+                </TabPanel>
+                <TabPanel>
+                  <div> Coming Soon </div>
+                </TabPanel>
+              </Tabs>
+            </div>
           </div>
         </div>
       </div>
@@ -148,7 +163,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addSkaterToOptimizer: (skater, sourceId) => dispatch(addSkaterToOptimizer(skater, sourceId)),
+  addSkaterToOptimizer: (skater, position) => dispatch(addSkaterToOptimizer(skater, position)),
   applyTeamFilter: (team) => dispatch(applyTeamFilter(team)),
   applyIndividualPositionFilter: (position) => dispatch(applyIndividualPositionFilter(position)),
   applyPairPositionFilter: (position) => dispatch(applyPairPositionFilter(position))
