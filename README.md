@@ -1,10 +1,10 @@
-Source for [puckluckfantasy](http://www.puckluckfantasy.com).
+Source for [puckluckfantasy](https://www.puckluckfantasy.com).
 
-Upcoming enhancements:
+Upcoming features:
 
-- HTTPs
+- Authentication and subscription
+- Premium feature locking
 - Lineup Optimizer
 - CSV export for lineup builder and optimizer
-- Mobile support
-- Subscriptions to unlock pairs, stacks and lineup optimizer
+- Mobile responsiveness
 - Player historical data and trends
