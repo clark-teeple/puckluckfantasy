@@ -7,4 +7,5 @@ Upcoming features:
 - Lineup Optimizer
 - CSV export for lineup builder and optimizer
 - Mobile responsiveness
+- Fanduel table/optimizer/builder
 - Player historical data and trends
