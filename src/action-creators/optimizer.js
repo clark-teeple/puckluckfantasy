@@ -1,7 +1,7 @@
-export const addSkaterToOptimizer = (row, position) => dispatch => {
+export const addSkaterToOptimizer = (row, position, skaterList) => dispatch => {
   dispatch({
     type: 'ADD_SKATER_TO_OPTIMIZER',
-    payload: {skater: row, position}
+    payload: {skater: row, position, skaterList}
   });
 }
 

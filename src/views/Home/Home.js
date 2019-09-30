@@ -117,7 +117,9 @@ class Home extends Component {
                     </div>
                     <div className="cell auto">
                       <PairTable
+                        addSkaterToOptimizer={ addSkaterToOptimizer }
                         data={ pairData }
+                        individualData={ skaterData }
                       />
                     </div>
                   </div>
@@ -126,7 +128,9 @@ class Home extends Component {
                   <div className="grid-y large-grid-frame">
                     <div className="cell auto">
                       <StackTable
+                        addSkaterToOptimizer={ addSkaterToOptimizer }
                         data={ stackData }
+                        individualData={ skaterData }
                       />
                     </div>
                   </div>
@@ -158,11 +162,11 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   ...state
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   addSkaterToOptimizer: (skater, position) => dispatch(addSkaterToOptimizer(skater, position)),
   applyTeamFilter: (team) => dispatch(applyTeamFilter(team)),
   applyIndividualPositionFilter: (position) => dispatch(applyIndividualPositionFilter(position)),

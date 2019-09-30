@@ -15,3 +15,15 @@ export function sortFloatColumn(aa, bb) {
   }
   return a > b ? 1 : -1;
 }
+
+const stackPositions = ['F3', 'DW', 'DC', 'WW', 'CW'];
+
+export function addSkatersToStacks(skaterData, stack) {
+  if (stackPositions.includes(stack.Pos)) {
+    const names = stack.Name.split(";");
+    return names.map((name => {
+      return skaterData.find((o) => o.Name === name.trim());
+    }))
+  }
+  return [stack];
+}

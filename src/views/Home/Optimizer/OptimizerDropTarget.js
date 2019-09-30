@@ -15,14 +15,33 @@ const positionMapping = {
   util: ['C', 'W', 'D']
 }
 
+const stackPositions = ['F3', 'DW', 'DC', 'WW', 'CW'];
+
 const skaterTarget = {
   drop(props, monitor) {
+    if (stackPositions.includes(monitor.getItem().value.Pos)) {
+      return {
+        position: monitor.getItem().value.Pos
+      };
+    }
     return {
       position: props.position
     }
   },
   canDrop(props, monitor) {
-    return positionMapping[props.position].includes(monitor.getItem().value.Pos);
+    const tempPosition = monitor.getItem().value.Pos;
+    let potentialPositions = [];
+    let usablePositions = [];
+    if (stackPositions.includes(tempPosition)) {
+      potentialPositions = monitor.getItem().individualData.map((item) => Object.keys(positionMapping).filter((pos) => {
+        return (positionMapping[pos].includes(item.Pos) && !props.optimizerState[pos]) || null;
+      }));
+      usablePositions = potentialPositions.filter((item) => {
+        return item.length;
+      });
+      console.info(potentialPositions)
+    }
+    return positionMapping[props.position].includes(monitor.getItem().value.Pos) || usablePositions.length === monitor.getItem().individualData.length;
   }
 };
 
@@ -91,7 +110,8 @@ class SkaterDrop extends Component {
       placeholder,
       removeSkater,
       highlighted,
-      connectDropTarget
+      connectDropTarget,
+      optimizerState
     } = this.props;
     const team = player ? player.Team : 'none';
     return connectDropTarget(
@@ -114,6 +134,7 @@ class SkaterDrop extends Component {
                   removeSkater={ removeSkater }
                   highlighted={ highlighted }
                   height= {this.state.height}
+                  optimizerState={ optimizerState }
                 />
               </TeamColorBox>
             </div>

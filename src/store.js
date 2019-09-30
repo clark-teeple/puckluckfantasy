@@ -13,4 +13,6 @@ const configureStore = () => {
   );
 }
 
-export default configureStore;
+const store = configureStore();
+
+export default store;

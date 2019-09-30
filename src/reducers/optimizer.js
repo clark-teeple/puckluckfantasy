@@ -2,6 +2,20 @@ const initialSalary = 50000;
 const initialPlayers = 9;
 const initialFPTS = 0
 
+const stackPositions = ['F3', 'DW', 'DC', 'WW', 'CW'];
+
+const positionMapping = {
+  centerOne: ['C'],
+  centerTwo: ['C'],
+  wingerOne: ['W'],
+  wingerTwo: ['W'],
+  wingerThree: ['W'],
+  defenseOne: ['D'],
+  defenseTwo: ['D'],
+  goalie: ['G'],
+  util: ['C', 'W', 'D']
+}
+
 const disallowDuplicates = (state, action) => {
   if (!Object.keys(state.optimizerData).filter((key) => {
     return state.optimizerData[key].Name === action.payload.skater.Name
@@ -50,12 +64,13 @@ const checkOptimizerValid = (candidate, current) => {
 export default (state = { optimizerData: {}, optimizerSalary: initialSalary, optimizerPlayers: initialPlayers, optimizerIsValid: true, optimizerFPTS: initialFPTS}, action) => {
   switch (action.type) {
     case 'ADD_SKATER_TO_OPTIMIZER':
-
+      const tempPosition = action.payload.skater.Pos;
+      const potentialOptimizerPositions = Object.keys(positionMapping).filter((pos) => positionMapping[pos].includes(tempPosition) && !state.optimizerData[pos]);
       let addCandidate = Object.assign({}, state.optimizerData);
 
       // disallow duplicates
-      if (disallowDuplicates(state, action)) {
-        addCandidate[action.payload.position] = action.payload.skater;
+      if (disallowDuplicates(state, action) && potentialOptimizerPositions.length) {
+        addCandidate[potentialOptimizerPositions[0]] = action.payload.skater;
       }
 
       const addCandidateProperties = checkOptimizerValid(addCandidate, state.optimizerData);

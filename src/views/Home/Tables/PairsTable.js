@@ -48,5 +48,5 @@ const defaultSorted = [
 ];
 
 export default (props) => {
-  return <div className=""> <Table columns={ columns } data={ props.data } defaultSorted={ defaultSorted } /> </div>
+  return <div className=""> <Table columns={ columns } data={ props.data } defaultSorted={ defaultSorted } addSkaterToOptimizer={ props.addSkaterToOptimizer } individualData={ props.individualData }/> </div>
 }

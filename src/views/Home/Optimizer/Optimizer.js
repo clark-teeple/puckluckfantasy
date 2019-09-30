@@ -46,6 +46,7 @@ class Optimizer extends Component {
                   accepts={ ['C'] }
                   placeholder="Center"
                   removeSkater={ this.props.removeSkaterFromOptimizer }
+                  optimizerState={ optimizerData }
                 />
                 <SkaterDrop
                   player={ optimizerData['centerTwo'] }
@@ -53,6 +54,7 @@ class Optimizer extends Component {
                   accepts={ ['C'] }
                   placeholder="Center"
                   removeSkater={ this.props.removeSkaterFromOptimizer }
+                  optimizerState={ optimizerData }
                 />
                 <SkaterDrop
                   player={ optimizerData['wingerOne'] }
@@ -60,6 +62,7 @@ class Optimizer extends Component {
                   accepts={ ['w'] }
                   placeholder="Winger"
                   removeSkater={ this.props.removeSkaterFromOptimizer }
+                  optimizerState={ optimizerData }
                 />
                 <SkaterDrop
                   player={ optimizerData['wingerTwo'] }
@@ -67,6 +70,7 @@ class Optimizer extends Component {
                   accepts={ ['w'] }
                   placeholder="Winger"
                   removeSkater={ this.props.removeSkaterFromOptimizer }
+                  optimizerState={ optimizerData }
                 />
                 <SkaterDrop
                   player={ optimizerData['wingerThree'] }
@@ -74,6 +78,7 @@ class Optimizer extends Component {
                   accepts={ ['w'] }
                   placeholder="Winger"
                   removeSkater={ this.props.removeSkaterFromOptimizer }
+                  optimizerState={ optimizerData }
                 />
                 <SkaterDrop
                   player={ optimizerData['defenseOne'] }
@@ -81,6 +86,7 @@ class Optimizer extends Component {
                   accepts={ ['D'] }
                   placeholder="Defense"
                   removeSkater={ this.props.removeSkaterFromOptimizer }
+                  optimizerState={ optimizerData }
                 />
                 <SkaterDrop
                   player={ optimizerData['defenseTwo'] }
@@ -88,6 +94,7 @@ class Optimizer extends Component {
                   accepts={ ['D'] }
                   placeholder="Defense"
                   removeSkater={ this.props.removeSkaterFromOptimizer }
+                  optimizerState={ optimizerData }
                 />
                 <SkaterDrop
                   player={ optimizerData['goalie'] }
@@ -95,6 +102,7 @@ class Optimizer extends Component {
                   accepts={ ['G'] }
                   placeholder="Goalie"
                   removeSkater={ this.props.removeSkaterFromOptimizer }
+                  optimizerState={ optimizerData }
                 />
                 <SkaterDrop
                   player={ optimizerData['util'] }
@@ -102,6 +110,7 @@ class Optimizer extends Component {
                   accepts={ ['D', 'C', 'W'] }
                   placeholder="Utility"
                   removeSkater={ this.props.removeSkaterFromOptimizer }
+                  optimizerState={ optimizerData }
                 />
               </div>
             </div>

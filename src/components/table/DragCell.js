@@ -11,7 +11,9 @@ const cellSource = {
   },
   endDrag(props, monitor) {
     if (monitor.getDropResult()) {
-      props.addSkaterToOptimizer(props.value, monitor.getDropResult().position);
+      props.individualData.forEach((skater) => {
+        props.addSkaterToOptimizer(skater, monitor.getDropResult().position);
+      })
     }
   }
 };

@@ -4,6 +4,7 @@ import 'react-table/react-table.css'
 import './table.scss';
 
 import Cell from './DragCell';
+import { addSkatersToStacks } from "./tableUtils";
 
 class Table extends Component {
   render() {
@@ -33,6 +34,7 @@ class Table extends Component {
                 <Cell
                   value={ row.row }
                   addSkaterToOptimizer={ this.props.addSkaterToOptimizer }
+                  individualData={ addSkatersToStacks(this.props.individualData, row.row) }
                 />
               );
           }}
