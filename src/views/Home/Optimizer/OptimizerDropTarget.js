@@ -39,7 +39,6 @@ const skaterTarget = {
       usablePositions = potentialPositions.filter((item) => {
         return item.length;
       });
-      console.info(potentialPositions)
     }
     return positionMapping[props.position].includes(monitor.getItem().value.Pos) || usablePositions.length === monitor.getItem().individualData.length;
   }
