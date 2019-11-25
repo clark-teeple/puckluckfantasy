@@ -15,7 +15,7 @@ class Table extends Component {
           data={ this.props.data }
           columns={ this.props.columns }
           defaultSorted={ this.props.defaultSorted }
-          defaultPageSize={50}
+          defaultPageSize={this.props.data.length}
           resizable={ false }
           expanded={expandedRows}
           onExpandedChange={(newExpanded, index) => {

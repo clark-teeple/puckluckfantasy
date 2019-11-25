@@ -31,6 +31,13 @@ CustomTab.tabsRole = 'Tab';
 
 class Home extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      showOptimizer: false
+    };
+  }
+
   // these functions apply filters data for each table in tabs
   setSkaterTableData() {
     const initialData = this.props.skaterReducer.individualData;
@@ -47,8 +54,13 @@ class Home extends Component {
     return initialData.filter(x => this.props.skaterReducer.selectedTeams.includes(x.Team));
   }
 
-  render() {
+  showOptimizer = () => {
+    this.setState({
+      showOptimizer: !this.state.showOptimizer
+    });
+  }
 
+  render() {
     const skaterData = this.setSkaterTableData();
     const pairData = this.setPairTableData();
     const stackData = this.setStackTableData();
@@ -67,10 +79,16 @@ class Home extends Component {
       addSkaterToOptimizer
     } = this.props;
 
+    const {
+      showOptimizer
+    } = this.state;
+
+    const tableSize = showOptimizer ? "large-8" : "";
+
     return (
       <div className="grid-container fluid">
         <div className="grid-x grid-padding-x">
-          <div className="cell large-8">
+          <div className={`cell ${tableSize}`}>
             <div className="grid-x grid-margin-x">
               <div className="cell">
                 <TeamFilter
@@ -97,6 +115,15 @@ class Home extends Component {
                         selectedPositions={ selectedIndividualPositions}
                         onCheck={ applyIndividualPositionFilter }
                       />
+                    </div>
+                    <div className="cell large-1">
+                      <Button
+                        onClick={() => this.showOptimizer()}
+                        className="button large alert"
+                        style={{ float: "right" }}
+                      >
+                        Show Optimizer
+                      </Button>
                     </div>
                     <div className="cell auto">
                       <SkaterTable
@@ -138,24 +165,30 @@ class Home extends Component {
               </Tabs>
             </div>
           </div>
-          <div className="cell large-3">
-            <div className="optimizer-floater">
-              <Tabs>
-                <TabList>
-                  <ButtonGroup isExpanded size={ Sizes.LARGE }>
-                    <Tab className="button expanded large alert"> Lineup Builder </Tab>
-                    <Tab className="button expanded large alert"> GPP Optimizer </Tab>
-                  </ButtonGroup>
-                </TabList>
-                <TabPanel>
-                  <Optimizer />
-                </TabPanel>
-                <TabPanel>
-                  <div> Coming Soon </div>
-                </TabPanel>
-              </Tabs>
-            </div>
-          </div>
+          { 
+            showOptimizer ? (
+              <div className="cell large-3">
+                <div className="optimizer-floater">
+                  <Tabs>
+                    <TabList>
+                      <ButtonGroup isExpanded size={ Sizes.LARGE }>
+                        <Tab className="button expanded large alert"> Lineup Builder </Tab>
+                        <Tab className="button expanded large alert"> GPP Optimizer </Tab>
+                      </ButtonGroup>
+                    </TabList>
+                    <TabPanel>
+                      <Optimizer />
+                    </TabPanel>
+                    <TabPanel>
+                      <div> Coming Soon </div>
+                    </TabPanel>
+                  </Tabs>
+                </div>
+              </div>
+            ) : (
+              null
+            )
+          }
         </div>
       </div>
     );
