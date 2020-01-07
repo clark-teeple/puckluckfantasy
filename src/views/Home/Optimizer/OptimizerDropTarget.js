@@ -12,7 +12,7 @@ const positionMapping = {
   defenseOne: ['D'],
   defenseTwo: ['D'],
   goalie: ['G'],
-  util: ['C', 'W', 'D']
+  util: ['UTIL']
 }
 
 const stackPositions = ['F3', 'DW', 'DC', 'WW', 'CW'];
@@ -72,9 +72,8 @@ const SkaterOptimizerRow = (props) => {
             className="grid-container player-box"
           >
             <div className="grid-x">
-              <div className="cell large-3" />
-              <div className="cell large-5 player-label">{ props.player.Name }</div>
-              <div className="cell large-4 player-label">{ props.player.Salary }</div>
+              <div className="cell player-label">{ props.player.Name }</div>
+              <div className="cell player-label">{ props.player.Salary }</div>
             </div>
           </div>
         )
@@ -87,18 +86,12 @@ class SkaterDrop extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      height: '0px'
+      height: "0px"
     }
   }
   componentDidMount() {
-    const height = Math.round(this.divElement.clientHeight);
+    const height = this.divElement.clientHeight;
     this.setState({ height });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.divElement.clientHeight !== Math.round(this.state.height)) {
-      this.setState({ height: Math.round(this.divElement.clientHeight )});
-    }
   }
 
   render() {
@@ -132,7 +125,7 @@ class SkaterDrop extends Component {
                   placeholder={ placeholder }
                   removeSkater={ removeSkater }
                   highlighted={ highlighted }
-                  height= {this.state.height}
+                  height={ this.state.height }
                   optimizerState={ optimizerState }
                 />
               </TeamColorBox>

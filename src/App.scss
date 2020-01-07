@@ -5,6 +5,7 @@
   background-size: contain;
   padding: 10px;
   padding-top: 30px;
+  overflow: hidden;
 }
 
 body {
@@ -12,10 +13,14 @@ body {
 }
 
 .navbar {
+  overflow: hidden;
 }
 
 .navimg {
+  background-image: url(https://res.cloudinary.com/dpe1j785q/image/upload/v1526327499/Puck-Luck_1_bnc8m8.svg);
+  background-size: contain;
   height: 250px;
+  width: 250px;
   top: -85px;
   position: absolute;
 }

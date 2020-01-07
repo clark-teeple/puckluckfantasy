@@ -38,8 +38,8 @@ const teamColorMapping = {
 
 export default class TeamColorBox extends Component {
   render() {
-    const primaryHeight = Math.round(this.props.height / 1.2);
-    const secondaryHeight = Math.round(this.props.height);
+    const primaryHeight = this.props.height / 1.2;
+    const secondaryHeight = this.props.height;
     const primary = `${primaryHeight}px solid ${teamColorMapping[this.props.team].primary}`;
     const secondary = `${secondaryHeight}px solid ${teamColorMapping[this.props.team].secondary}`;
     const background = `${teamColorMapping[this.props.team].background}`;
