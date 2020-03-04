@@ -12,6 +12,14 @@ const mapSidePos = (pos) => {
   }
 };
 
+const processPPUnit = (unit) => {
+  if (isNaN(unit)) {
+    return '';
+  } else {
+    return unit;
+  }
+}
+
 const processSkaterData = (data) => {
   const objectProperties = ['Name', 'Pos', 'FPts', 'Salary', 'Value', 'Rank', 'Line', 'PPUnit', 'Team', 'OppTeam', 'ProjTOIEV', 'ProjTOIPP', 'ProjTOISH'];
   const arrayData = data.replace(/(\r\n|\r|\n)/g, ',').split(',');
@@ -32,6 +40,8 @@ const processSkaterData = (data) => {
       playerObject.id = genID();
       if (property === 'Pos') {
         playerObject[property] = mapSidePos(playerRow[index]);
+      } else if (property === 'PPUnit') {
+        playerObject[property] = processPPUnit(playerRow[index]);
       } else {
         playerObject[property] = playerRow[index];
       }
