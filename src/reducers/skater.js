@@ -2,8 +2,18 @@ const genID = () => {
   return Math.random().toString(36).replace(/[^a-z]+/g, '').substr(2, 10);
 }
 
+const mapSidePos = (pos) => {
+  if (pos === 'LW' || pos === 'RW') {
+    return 'W';
+  } else if (pos === 'RD' || pos === 'LD') {
+    return 'D';
+  } else {
+    return pos;
+  }
+};
+
 const processSkaterData = (data) => {
-  const objectProperties = ['Name', 'Pos', 'FPts', 'FPtsSD', 'Salary', 'SalarySD', 'Value', 'ValueSD', 'Rank', 'RankSD', 'Team', 'OppTeam', 'ProjTOIEV', 'ProjTOIPP', 'ProjTOISH'];
+  const objectProperties = ['Name', 'Pos', 'FPts', 'Salary', 'Value', 'Rank', 'Line', 'PPUnit', 'Team', 'OppTeam', 'ProjTOIEV', 'ProjTOIPP', 'ProjTOISH'];
   const arrayData = data.replace(/(\r\n|\r|\n)/g, ',').split(',');
   const processedData = {
     C: [],
@@ -20,7 +30,11 @@ const processSkaterData = (data) => {
     const playerRow = arrayData.slice(i, i + objectProperties.length);
     objectProperties.forEach((property, index) => {
       playerObject.id = genID();
-      playerObject[property] = playerRow[index];
+      if (property === 'Pos') {
+        playerObject[property] = mapSidePos(playerRow[index]);
+      } else {
+        playerObject[property] = playerRow[index];
+      }
     });
     processedData[playerObject['Pos']].push(playerObject);
   }

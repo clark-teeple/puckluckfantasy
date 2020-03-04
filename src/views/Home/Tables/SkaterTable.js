@@ -32,7 +32,16 @@ const columns = [
     accessor: 'Rank',
     sortMethod: sortIntegerColumn,
     width: 75
-  }, {
+  }, 
+  {
+    Header: 'LINE',
+    accessor: 'Line',
+  },
+  {
+    Header: 'PP UNIT',
+    accessor: 'PPUnit'
+  },
+  {
     Header: 'TEAM',
     accessor: 'Team'
   }, {
